@@ -1,0 +1,1 @@
+dotnet ef migrations remove -s .\src\ShoppingList.Api\ -p .\src\ShoppingList.Api\
