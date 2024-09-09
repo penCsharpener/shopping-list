@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ShoppingList.Shared.Models;
+using ShoppingList.Application.Models;
 
 namespace ShoppingList.Api.Data.Configuration;
 

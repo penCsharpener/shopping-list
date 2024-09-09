@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShoppingList.Shared.Models;
+using ShoppingList.Application.Models;
 
 namespace ShoppingList.Api.Data;
 

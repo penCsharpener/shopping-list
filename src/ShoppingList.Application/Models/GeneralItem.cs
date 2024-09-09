@@ -1,4 +1,4 @@
-﻿namespace ShoppingList.Shared.Models;
+﻿namespace ShoppingList.Application.Models;
 
 public class GeneralItem
 {

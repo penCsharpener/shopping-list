@@ -1,0 +1,12 @@
+﻿
+<MudSelect T="string" Label="Categories" AnchorOrigin="Origin.BottomCenter">
+  @foreach (var item in Categories)
+  {
+    <MudSelectItem Value="@item.Name" />
+  }
+</MudSelect>
+
+@code {
+    [Parameter]
+    public Category[] Categories { get; set; }
+}

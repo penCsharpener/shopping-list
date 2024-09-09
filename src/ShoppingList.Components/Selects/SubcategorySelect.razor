@@ -1,0 +1,11 @@
+﻿
+<MudSelect T="Subcategory" Label="Subcategories" @bind-Value="Value" AnchorOrigin="Origin.BottomCenter" @onchange="OnSelectionChangedAsync">
+    @foreach (var item in Subcategories)
+    {
+        <MudSelectItem @key="@item" Value="@item">@item.Name</MudSelectItem>
+    }
+</MudSelect>
+
+<p>Inside the component @Value?.Name</p>
+
+

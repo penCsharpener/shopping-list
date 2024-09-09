@@ -1,8 +1,10 @@
 
+using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using ShoppingList.Api.Data;
 using ShoppingList.Api.Extensions;
-using ShoppingList.Shared.Models.Settings;
+using ShoppingList.Application.Models.Settings;
 
 namespace ShoppingList.Api;
 
@@ -19,13 +21,20 @@ public class Program
         var connectionString = builder.Configuration.GetDefaultConnectionString();
         var settings = builder.Configuration.GetSection(nameof(Appsettings)).Get<Appsettings>()!;
 
+        builder.Services.AddSerilog(conf => conf.ReadFrom.Configuration(builder.Configuration));
+
         builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlite(connectionString, o => o.MigrationsAssembly(typeof(Program).Assembly.ToString())));
+        builder.Services.AddFastEndpoints(options =>
+        {
+            options.Assemblies = new[] { typeof(Program).Assembly };
+        });
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
         var app = builder.Build();
 
+        app.UseFastEndpoints();
         await app.SeedDatabaseAsync(settings);
 
         // Configure the HTTP request pipeline.
@@ -58,7 +67,7 @@ public class Program
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        app.MapGet("/weatherforecast", (HttpContext httpContext) =>
+        app.MapGet("/api/weatherforecast", (HttpContext httpContext) =>
         {
             var forecast = Enumerable.Range(1, 20).Select(index =>
                 new WeatherForecast

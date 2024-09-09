@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
+using ShoppingList.Application.Abstractions;
+using ShoppingList.Client.Components.Selects;
+using ShoppingList.Client.Services;
 
 namespace ShoppingList.Client;
 public class Program
@@ -12,6 +15,8 @@ public class Program
     builder.RootComponents.Add<HeadOutlet>("head::after");
 
     builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+    builder.Services.AddScoped<ISelectDataService, SelectDataService>();
+    builder.Services.AddScoped<IJsService, JsService>();
     builder.Services.AddMudServices();
     //builder.Services.AddOidcAuthentication(options =>
     //    {
