@@ -1,4 +1,3 @@
-
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -13,6 +12,7 @@ public class Program
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        builder.Configuration.AddEnvironmentVariables(prefix: "SHOPPINGLISTAPP_");
 
         // Add services to the container.
         builder.Services.AddAuthorization();
