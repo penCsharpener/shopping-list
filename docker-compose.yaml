@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: src/ShoppingList.Api/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - SHOPPINGLISTAPP_ENVIRONMENT=Production
+      - SHOPPINGLISTAPP_HTTP_PORTS=8080
+      - SHOPPINGLISTAPP_HTTPS_PORTS=8081
+      - SHOPPINGLISTAPP_URLS=http://localhost:5000
+    #    volumes:
+    

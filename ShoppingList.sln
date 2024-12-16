@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5871A640-F765-4EDD-AA30-1894B31DCD03}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		docker-compose.yaml = docker-compose.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingList.DebugServer", "src\ShoppingList.DebugServer\ShoppingList.DebugServer.csproj", "{FB2B61C0-2DC4-4EE8-8F3B-950108A3E984}"
