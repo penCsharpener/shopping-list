@@ -23,10 +23,11 @@ public class Program
 
         builder.Services.AddSerilog(conf => conf.ReadFrom.Configuration(builder.Configuration));
 
-        builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlite(connectionString, o => o.MigrationsAssembly(typeof(Program).Assembly.ToString())));
+        builder.Services.AddDbContext<ShopDbContext>(options =>
+            options.UseSqlite(connectionString, o => o.MigrationsAssembly(typeof(Program).Assembly.ToString())));
         builder.Services.AddFastEndpoints(options =>
         {
-            options.Assemblies = new[] { typeof(Program).Assembly };
+            options.Assemblies = [typeof(Program).Assembly];
         });
 
         builder.Services.AddEndpointsApiExplorer();
@@ -68,19 +69,19 @@ public class Program
         };
 
         app.MapGet("/api/weatherforecast", (HttpContext httpContext) =>
-        {
-            var forecast = Enumerable.Range(1, 20).Select(index =>
-                new WeatherForecast
-                {
-                    Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    TemperatureC = Random.Shared.Next(-20, 55),
-                    Summary = summaries[Random.Shared.Next(summaries.Length)]
-                })
-                .ToArray();
-            return forecast;
-        })
-        .WithName("GetWeatherForecast")
-        .WithOpenApi();
+            {
+                var forecast = Enumerable.Range(1, 20).Select(index =>
+                        new WeatherForecast
+                        {
+                            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                            TemperatureC = Random.Shared.Next(-20, 55),
+                            Summary = summaries[Random.Shared.Next(summaries.Length)]
+                        })
+                    .ToArray();
+                return forecast;
+            })
+            .WithName("GetWeatherForecast")
+            .WithOpenApi();
 
         await app.RunAsync();
     }
