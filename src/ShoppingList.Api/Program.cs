@@ -52,7 +52,10 @@ public class Program
             app.UseHsts();
         }
 
-        app.UseHttpsRedirection();
+        if (app.Environment.IsDevelopment() is false)
+        {
+            app.UseHttpsRedirection();
+        }
 
         app.UseBlazorFrameworkFiles();
         app.UseStaticFiles();
