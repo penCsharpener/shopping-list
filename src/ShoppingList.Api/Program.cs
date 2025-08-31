@@ -32,15 +32,19 @@ public class Program
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        builder.Services.AddSingleton(sp =>
+            new ConfigurationLogger(builder.Configuration, sp.GetRequiredService<ILogger<ConfigurationLogger>>()));
 
         var app = builder.Build();
+        app.Services.GetService<ConfigurationLogger>()?.LogConfiguration();
 
         app.UseFastEndpoints();
-        await app.SeedDatabaseAsync(settings);
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
+            await app.SeedDatabaseAsync(settings);
+
             app.UseWebAssemblyDebugging();
             app.UseSwagger();
             app.UseSwaggerUI();
